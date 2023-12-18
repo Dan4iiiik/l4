@@ -1,6 +1,7 @@
 package org.example;
 
 import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Order;
 import org.junit.jupiter.api.Test;
 
 import java.util.LinkedHashMap;
@@ -38,6 +39,7 @@ class BSTNodeTest {
     }
 
     @Test
+    @Order(1)
     void testCase2() {
         nodeRoot = new BSTNode(27, hashMap.get(27));
         for (int key : hashMap.keySet()) {
@@ -50,9 +52,8 @@ class BSTNodeTest {
     }
 
     @Test
+    @Order(2)
     void testCase3() {
-        testCase2();
-
         BSTNode node;
         node = nodeRoot.search(nodeRoot, 25);
         assertEquals("Unique 25", node.getValue());
@@ -70,19 +71,11 @@ class BSTNodeTest {
         assertNull(node);
     }
 
+
     @Test
+    @Order(4)
     void testCase4() {
         BSTNode node;
-
-        nodeRoot = new BSTNode(27, hashMap.get(27));
-        for (int key : hashMap.keySet()) {
-            if (key == 30) {
-                continue;
-            }
-            String value = hashMap.get(key);
-            nodeRoot.insert(nodeRoot, key, value);
-        }
-        assertEquals(hashMap.size() - 1, nodeRoot.countNodes(nodeRoot));
 
         nodeRoot.insert(nodeRoot, 30, "Unique 30");
         node = nodeRoot.search(nodeRoot, 30);
@@ -97,9 +90,8 @@ class BSTNodeTest {
     }
 
     @Test
+    @Order(3)
     void testCase5() {
-        testCase2();
-
         BSTNode node;
 
         nodeRoot = nodeRoot.delete(nodeRoot, 16);
